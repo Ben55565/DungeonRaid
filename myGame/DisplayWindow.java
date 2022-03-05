@@ -1,7 +1,7 @@
 package myGame;
 
 import java.awt.Canvas;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -16,6 +16,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 	public static int width = 300;
 	public static int height = (width / 16) * 9; // giving aspect ration of 16:9
 	public static int scale = 3; // scaling the window size, while the render stay the same
+	public static String title = "Dungeon Raid";
 	// object variables
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); // each image will be sized by original width and height and later will be scaled
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData(); // get pixels from the image and register them into an array to modify(access the image itself)
@@ -52,10 +53,33 @@ public class DisplayWindow extends Canvas implements Runnable {
 	}
 
 	public void run() {
+		long lastTime = System.nanoTime(); // counting the CPU cycle in nano seconds before the loop
+		long timer = System.currentTimeMillis();
+		final double ns = 1000000000.0 / 60.0; // 1 nano second divided by the 60 fps target
+		double delta = 0;
+		int frames = 0; // fps counter VAR
+		int updates = 0;
 		while (isRunning) {
-			update(); // method for updating the frame each time, aiming for 60 fps
+			long now = System.nanoTime(); // current loop CPU cycle
+			delta += (now - lastTime) / ns; // adding to delta the time difference
+			lastTime = now; // updating each loop the last time as the last loop
+			while(delta >= 1) {   // will happened 60 times a second
+				update(); // method for updating the frame each time, aiming for 60 fps
+				updates++; //every time an update made for the pixels, Inc the updates VAR
+				delta--;
+			}
 			render(); // method for generating the frames in speed limited by user hardware
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000) { // as long as the difference between the start and now is greater then 1 second
+				timer += 1000;
+				window.setTitle(title + "    |    Stats: " + "ups: " + updates + ", fps: " + frames);
+				updates = 0;
+				frames = 0; // setting them back to zero each 60 renders per second
+			}
+
 		}
+		stop();
 	}
 
 	public void update() {
