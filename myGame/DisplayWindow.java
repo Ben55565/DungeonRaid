@@ -1,7 +1,6 @@
 package myGame;
 
 import java.awt.Canvas;
-//import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -9,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import myGameGraphics.Screen;
+import keyInput.KeyBoard;
 
 public class DisplayWindow extends Canvas implements Runnable {
 	// static variables
@@ -25,6 +25,9 @@ public class DisplayWindow extends Canvas implements Runnable {
 	private boolean isRunning = false;
 	private Screen screen = new Screen(width, height); // screen for dealing with the pixels
 	private JFrame window; // creating the window for the game
+	private int xOffset = 0;
+	private int yOffset = 0;
+	private KeyBoard key;
 
 	public JFrame getWindow() {
 		return window;
@@ -34,6 +37,9 @@ public class DisplayWindow extends Canvas implements Runnable {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		window = new JFrame();
+		
+		key = new KeyBoard();
+		addKeyListener(key);
 
 	}
 
@@ -83,7 +89,9 @@ public class DisplayWindow extends Canvas implements Runnable {
 	}
 
 	public void update() {
-
+		key.update();
+		xOffset++;
+		yOffset++;
 	}
 
 	public void render() {
@@ -93,7 +101,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 			return;
 		}
 		screen.clear(); // clearing the previous pixels
-		screen.render(); // from screen class, calling the graphic render for each pixel
+		screen.render(xOffset, yOffset); // from screen class, calling the graphic render for each pixel
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}

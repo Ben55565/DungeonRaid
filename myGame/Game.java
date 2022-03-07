@@ -16,6 +16,6 @@ public class Game {
 		game.getWindow().setVisible(true); // set the window as visible
 		
 		game.start();
-
+		game.requestFocus();
 	}
 }
