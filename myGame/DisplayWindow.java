@@ -25,8 +25,8 @@ public class DisplayWindow extends Canvas implements Runnable {
 	private boolean isRunning = false;
 	private Screen screen = new Screen(width, height); // screen for dealing with the pixels
 	private JFrame window; // creating the window for the game
-	private int xOffset = 0;
-	private int yOffset = 0;
+	private int x = 0; //offsets for moving the screen
+	private int y = 0;
 	private KeyBoard key;
 
 	public JFrame getWindow() {
@@ -36,6 +36,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 	public DisplayWindow() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
+		setFocusable(true);
 		window = new JFrame();
 		
 		key = new KeyBoard();
@@ -90,8 +91,15 @@ public class DisplayWindow extends Canvas implements Runnable {
 
 	public void update() {
 		key.update();
-		xOffset++;
-		yOffset++;
+		if (key.up)
+			y--;
+		if (key.down)
+			y++;
+		if (key.left)
+			x--;
+		if (key.right)
+			x++;
+		
 	}
 
 	public void render() {
@@ -101,7 +109,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 			return;
 		}
 		screen.clear(); // clearing the previous pixels
-		screen.render(xOffset, yOffset); // from screen class, calling the graphic render for each pixel
+		screen.render(x, y); // from screen class, calling the graphic render for each pixel
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}

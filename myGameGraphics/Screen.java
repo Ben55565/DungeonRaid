@@ -37,7 +37,7 @@ public class Screen {
 				int tileIndex = ((xx >> 4) & MAP_SIZE-1) + ((yy >> 4) & MAP_SIZE-1) * MAP_SIZE; // find the correct tile matching for the specific pixel its on, using size of 16 *note to self - lower it when im more advanced.
 				// >> - instead of dividing by 16, which is power of 2, >> is shifting the bits 4 places  right, so the division action achieved but in a faster way - using bits
 				// & - creating some kind of loop, if we try to go beyond the 63 tile, it will return to the tile index 0
-				pixels[x + (y * width)] = tiles[tileIndex]; // making the current pixel matching the tile we found one line up
+				pixels[x + (y * width)] = Sprite.grass.pixels[(xx & 15) + (yy & 15) * Sprite.grass.SIZE]; // making the current pixel matching the tile we found one line up
 				
 			}
 		}
