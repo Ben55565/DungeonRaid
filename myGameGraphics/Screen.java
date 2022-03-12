@@ -1,67 +1,55 @@
 package myGameGraphics;
 
-
-
 import tile.Tile;
 
 public class Screen {
-	private final int MAP_SIZE = 64;
-	
+	private final int MAP_SIZE = 128;
+
 	// tiles are full block map. so when the game starts what shown on the screen is one tile.
-	// i made each tile more detailed, check ahead that no problem accrue, if so, change back the file directory on Sprite sheet class,
-	// in this class change back the pixels array calculations from & 7 to & 15
-	
-	private int width, height;
+
+
+	public int width, height;
 	public int[] pixels;
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; // making the screen as 64*64 tiles
 
+	public int xOffset, yOffset;
 
 	public Screen(int width, int height) {
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
-		
+
 	}
 
-	
 	public void clear() {
-		for(int i = 0; i < pixels.length; i++) {
+		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0;
 		}
 	}
-	
-	public void render(int xOffset, int yOffset) {
-		for(int y = 0; y < height; y++) {
-			int yp = y + yOffset;
-			if(yp < 0 || yp >= height)
-				continue;
-			for(int x = 0; x < width; x++) {
-				int xp = x + xOffset;
-				if(xp < 0 || xp >= width)
-					continue;
-				pixels[xp + (yp * width)] = Sprite.grass.pixels[(x & 7) + (y & 7) * Sprite.grass.SIZE]; // making the current pixel matching the tile we found one line up
-				
-			}
-		}
-	}
-	
+
 	public void renderTile(int xp, int yp, Tile tile) {
+		xp -= xOffset; // cause right now the control is for moving the screen not the player. that corrects it
+		yp -= yOffset;
 		for (int y = 0; y < tile.sprite.SIZE; y++) {
 			int ya = yp + y;
 			for (int x = 0; x < tile.sprite.SIZE; x++) {
 				int xa = xp + x;
-				if(xa < 0 || xa >= width || ya < 0 || ya >= width)
+				if (xa < 0 || xa >= width || ya < 0 || ya >= width)
 					break;
 				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE]; // set the current offset pixel to be the tile pixel(simulate the moving background)
-					
-			}
-			
-		}
-		
-	}
-	
-}
 
+			}
+
+		}
+
+	}
+
+	public void setOffset(int xOffset, int yOffset) {
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+	}
+
+}
 
 /* Saved comments for myself to learn from:
  * 
@@ -70,4 +58,3 @@ public class Screen {
  *	& - creating some kind of loop, if we try to go beyond the 63 tile, it will return to the tile index 0
  * 
  */
- 

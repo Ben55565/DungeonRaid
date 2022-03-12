@@ -9,6 +9,8 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import myGameGraphics.Screen;
 import keyInput.KeyBoard;
+import level.Level;
+import level.RandomLevel;
 
 public class DisplayWindow extends Canvas implements Runnable {
 	// static variables
@@ -20,7 +22,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 	// object variables
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); // each image will be sized by original width and height and later will be scaled
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData(); // get pixels from the image and register them into an array to modify(access the image itself)
-
+	private Level level;
 	private Thread displayThread;
 	private boolean isRunning = false;
 	private Screen screen = new Screen(width, height); // screen for dealing with the pixels
@@ -38,7 +40,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 		setPreferredSize(size);
 		setFocusable(true);
 		window = new JFrame();
-		
+		level = new RandomLevel(64,64);
 		key = new KeyBoard();
 		addKeyListener(key);
 
@@ -70,15 +72,15 @@ public class DisplayWindow extends Canvas implements Runnable {
 			long now = System.nanoTime(); // current loop CPU cycle
 			delta += (now - lastTime) / ns; // adding to delta the time difference
 			lastTime = now; // updating each loop the last time as the last loop
-			while(delta >= 1) {   // will happened 60 times a second
+			while (delta >= 1) { // will happened 60 times a second
 				update(); // method for updating the frame each time, aiming for 60 fps
 				updates++; //every time an update made for the pixels, Inc the updates VAR
 				delta--;
 			}
 			render(); // method for generating the frames in speed limited by user hardware
 			frames++;
-			
-			if(System.currentTimeMillis() - timer > 1000) { // as long as the difference between the start and now is greater then 1 second
+
+			if (System.currentTimeMillis() - timer > 1000) { // as long as the difference between the start and now is greater then 1 second
 				timer += 1000;
 				window.setTitle(title + "    |    Stats: " + "ups: " + updates + ", fps: " + frames);
 				updates = 0;
@@ -99,7 +101,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 			x--;
 		if (key.right)
 			x++;
-		
+
 	}
 
 	public void render() {
@@ -109,7 +111,8 @@ public class DisplayWindow extends Canvas implements Runnable {
 			return;
 		}
 		screen.clear(); // clearing the previous pixels
-		screen.render(x, y); // from screen class, calling the graphic render for each pixel
+		//screen.render(x, y); // from screen class, calling the graphic render for each pixel
+		level.render(x, y, screen);
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
