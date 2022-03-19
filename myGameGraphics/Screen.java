@@ -34,8 +34,10 @@ public class Screen {
 			int ya = yp + y;
 			for (int x = 0; x < tile.sprite.SIZE; x++) {
 				int xa = xp + x;
-				if (xa < 0 || xa >= width || ya < 0 || ya >= width)
+				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) // xa can be lower the size of a tile to handle the render of the black bar on the left
 					break;
+				if(xa < 0)
+					xa = 0; // handle out of bounds exception
 				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE]; // set the current offset pixel to be the tile pixel(simulate the moving background)
 
 			}
