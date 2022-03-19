@@ -7,7 +7,7 @@ import myGameGraphics.Screen;
 
 public abstract class Entity {
 	
-	public int x, y;
+	public int x, y; // control the location of each entity on the map
 	private boolean removed = false;
 	protected Level level;
 	protected final Random random = new Random();

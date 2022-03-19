@@ -9,11 +9,21 @@ public class Sprite {
 
 	public static Sprite grass = new Sprite(8, 0, 0, Spritesheet.tiles); // create a sprite itself, grass texture
 	public static Sprite voidSprit = new Sprite(8, 0x65b4e6); // create a sprite itself, grass texture
+	
+	public static Sprite player0 = new Sprite(8, 0, 18, Spritesheet.tiles); // 19 is the y position in the sprite, multiplying by 8 cause the size of each one is 8
+	public static Sprite player1 = new Sprite(8, 1, 18, Spritesheet.tiles);
+	public static Sprite player2 = new Sprite(8, 2, 18, Spritesheet.tiles);
+	public static Sprite player3 = new Sprite(8, 0, 19, Spritesheet.tiles);
+	public static Sprite player4 = new Sprite(8, 1, 19, Spritesheet.tiles);
+	public static Sprite player5 = new Sprite(8, 2, 19, Spritesheet.tiles);
+	public static Sprite player6 = new Sprite(8, 0, 20, Spritesheet.tiles);
+	public static Sprite player7 = new Sprite(8, 1, 20, Spritesheet.tiles);
+	public static Sprite player8 = new Sprite(8, 2, 20, Spritesheet.tiles); // the player on my sprite takes 9 tiles, so i had to do that to get all the pieces
 
 	public Sprite(int size, int x, int y, Spritesheet sheet) {
 		SIZE = size;
-		this.x = x * SIZE; // because i want it to be located in a specific place int the sheet
-		this.y = y;
+		this.x = x * SIZE; // because i want it to be located in a specific place in the sheet= each tile is multiplied by his size so when i change by 1, the tile is changed and not the pixel
+		this.y = y * SIZE;
 		this.sheet = sheet;
 		pixels = new int[SIZE * SIZE]; // size of the sprite
 		load();

@@ -11,6 +11,7 @@ import myGameGraphics.Screen;
 import keyInput.KeyBoard;
 import level.Level;
 import level.RandomLevel;
+import mob.Player;
 
 public class DisplayWindow extends Canvas implements Runnable {
 	// static variables
@@ -27,9 +28,8 @@ public class DisplayWindow extends Canvas implements Runnable {
 	private boolean isRunning = false;
 	private Screen screen = new Screen(width, height); // screen for dealing with the pixels
 	private JFrame window; // creating the window for the game
-	private int x = 0; //offsets for moving the screen
-	private int y = 0;
 	private KeyBoard key;
+	private Player player;
 
 	public JFrame getWindow() {
 		return window;
@@ -43,6 +43,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 		level = new RandomLevel(64,64);
 		key = new KeyBoard();
 		addKeyListener(key);
+		player = new Player(key);
 
 	}
 
@@ -93,14 +94,8 @@ public class DisplayWindow extends Canvas implements Runnable {
 
 	public void update() {
 		key.update();
-		if (key.up)
-			y--;
-		if (key.down)
-			y++;
-		if (key.left)
-			x--;
-		if (key.right)
-			x++;
+		player.update();
+	
 
 	}
 
@@ -112,7 +107,10 @@ public class DisplayWindow extends Canvas implements Runnable {
 		}
 		screen.clear(); // clearing the previous pixels
 		//screen.render(x, y); // from screen class, calling the graphic render for each pixel
-		level.render(x, y, screen);
+		int xScroll = player.x - screen.width / 2; // setting the player in the middle of the screen
+		int yScroll = player.y - screen.height / 2;
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
