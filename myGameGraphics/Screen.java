@@ -8,7 +8,6 @@ public class Screen {
 
 	// tiles are full block map. so when the game starts what shown on the screen is one tile.
 
-
 	public int width, height;
 	public int[] pixels;
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; // making the screen as 64*64 tiles
@@ -37,7 +36,7 @@ public class Screen {
 				int xa = xp + x;
 				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) // xa can be lower the size of a tile to handle the render of the black bar on the left
 					break;
-				if(xa < 0)
+				if (xa < 0)
 					xa = 0; // handle out of bounds exception
 				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE]; // set the current offset pixel to be the tile pixel(simulate the moving background)
 
@@ -46,20 +45,20 @@ public class Screen {
 		}
 
 	}
-	
+
 	public void renderPlayer(int xp, int yp, Sprite sprite) {
 		xp -= xOffset; // cause right now the control is for moving the screen not the player. that corrects it
 		yp -= yOffset;
-		for (int y = 0; y < 8; y++) {
+		for (int y = 0; y < 24; y++) {
 			int ya = yp + y;
-			for (int x = 0; x < 8; x++) {
+			for (int x = 0; x < 24; x++) {
 				int xa = xp + x;
-				if (xa < -8 || xa >= width || ya < 0 || ya >= height) // xa can be lower the size of a tile to handle the render of the black bar on the left
+				if (xa < -24 || xa >= width || ya < 0 || ya >= height) // xa can be lower the size of a tile to handle the render of the black bar on the left
 					break;
-				if(xa < 0)
+				if (xa < 0)
 					xa = 0; // handle out of bounds exception
-				int color = sprite.pixels[x + (y* 8)]; // variable to define the color to render
-				if(color != 0xff000000) // dont render black - dont render the back background of the character
+				int color = sprite.pixels[x + (y * 24)]; // variable to define the color to render
+				if (color != 0xff000000) // dont render black - dont render the back background of the character
 					pixels[xa + ya * width] = color; // set the current offset pixel to be the tile pixel(simulate the moving background)
 
 			}

@@ -5,48 +5,94 @@ import myGameGraphics.Screen;
 import myGameGraphics.Sprite;
 
 public class Player extends Mob {
-	
+
 	private KeyBoard key;
-	
-	
+	private Sprite sprite;
+	private int anime = 0;
+	private boolean walking = false;
+
 	public Player(KeyBoard key) {
-		
-		this.key = key; 
-		
+
+		this.key = key;
+		sprite = Sprite.playerDown; // just making sure i wont get null pointer exception
+
 	}
-	
+
 	public Player(int x, int y, KeyBoard key) { // setting the placing of the player according to x,y
-		
+
 		this.x = x;
 		this.y = y;
 		this.key = key;
-		
+
 	}
-	
+
 	public void update() { // update the movement of the player according to the key pressed.
-		
+
 		int xa = 0, ya = 0; // note the direction the player needs to move
-		if(key.up) ya--;
-		if(key.down) ya++;
-		if(key.left) xa--;
-		if(key.right) xa++;
-		
-		if(xa !=0 || ya != 0) move(xa, ya); // their value if not 0 can be only 1 or -1(indicating the direction where 0 is stay in place) so if there is any movement from the key, make it.
-		
+		if (anime < 7500)
+			anime++; // avoid crushing if the game is open with no input, should be going up by 60 each second
+		else
+			anime = 0;
+
+		if (key.up)
+			ya--;
+		if (key.down)
+			ya++;
+		if (key.left)
+			xa--;
+		if (key.right)
+			xa++;
+
+		if (xa != 0 || ya != 0) {
+			move(xa, ya); // their value if not 0 can be only 1 or -1(indicating the direction where 0 is stay in place) so if there is any movement from the key, make it.
+			walking = true;
+		} else {
+			walking = false;
+		}
 	}
-	
+
 	public void render(Screen screen) {
-		int xx = x - 8; // making the player centered
-		int yy = y - 8;
-		screen.renderPlayer(xx, yy, Sprite.player0);
-		screen.renderPlayer(xx + 8, yy, Sprite.player1);
-		screen.renderPlayer(xx + 16, yy, Sprite.player2);
-		screen.renderPlayer(xx, yy + 8, Sprite.player3);
-		screen.renderPlayer(xx + 8, yy + 8, Sprite.player4);
-		screen.renderPlayer(xx + 16, yy + 8, Sprite.player5);
-		screen.renderPlayer(xx, yy + 16, Sprite.player6);
-		screen.renderPlayer(xx + 8, yy + 16, Sprite.player7);
-		screen.renderPlayer(xx + 16, yy + 16, Sprite.player8);
+		if (dir == 0) {
+			sprite = Sprite.playerUp;
+			if (walking) {
+				if (anime % 25 > 10) { // the higher the modulo, the slower the animation
+					sprite = Sprite.playerWUp1;
+				} else {
+					sprite = Sprite.playerWUp2;
+				}
+			}
+		}
+		if (dir == 1) {
+			sprite = Sprite.playerRight;
+			if (walking) {
+				if (anime % 25 > 10) {
+					sprite = Sprite.playerWRight1;
+				} else {
+					sprite = Sprite.playerWRight2;
+				}
+			}
+		}
+		if (dir == 2) {
+			sprite = Sprite.playerDown;
+			if (walking) {
+				if (anime % 25 > 10) {
+					sprite = Sprite.playerWDown1;
+				} else {
+					sprite = Sprite.playerWDown2;
+				}
+			}
+		}
+		if (dir == 3) {
+			sprite = Sprite.playerLeft;
+			if (walking) {
+				if (anime % 25 > 10) {
+					sprite = Sprite.playerWLeft1;
+				} else {
+					sprite = Sprite.playerWLeft2;
+				}
+			}
+		}
+		screen.renderPlayer(x - 8, y - 8, sprite);
 	}
-	
+
 }

@@ -9,17 +9,23 @@ public class Sprite {
 
 	public static Sprite grass = new Sprite(8, 0, 0, Spritesheet.tiles); // create a sprite itself, grass texture
 	public static Sprite voidSprit = new Sprite(8, 0x65b4e6); // create a sprite itself, grass texture
-	
-	public static Sprite player0 = new Sprite(8, 0, 18, Spritesheet.tiles); // 19 is the y position in the sprite, multiplying by 8 cause the size of each one is 8
-	public static Sprite player1 = new Sprite(8, 1, 18, Spritesheet.tiles);
-	public static Sprite player2 = new Sprite(8, 2, 18, Spritesheet.tiles);
-	public static Sprite player3 = new Sprite(8, 0, 19, Spritesheet.tiles);
-	public static Sprite player4 = new Sprite(8, 1, 19, Spritesheet.tiles);
-	public static Sprite player5 = new Sprite(8, 2, 19, Spritesheet.tiles);
-	public static Sprite player6 = new Sprite(8, 0, 20, Spritesheet.tiles);
-	public static Sprite player7 = new Sprite(8, 1, 20, Spritesheet.tiles);
-	public static Sprite player8 = new Sprite(8, 2, 20, Spritesheet.tiles); // the player on my sprite takes 9 tiles, so i had to do that to get all the pieces
 
+	public static Sprite playerDown = new Sprite(24, 0, 6, Spritesheet.tiles); // 24 because each tile is sized 8, the character is 3X3 , so i triple the size(8*3), and slice the tile number by three(the original 9 piece creation is in comments class)
+	public static Sprite playerUp = new Sprite(24, 2, 6, Spritesheet.tiles);
+	public static Sprite playerLeft = new Sprite(24, 1, 6, Spritesheet.tiles);
+	public static Sprite playerRight = new Sprite(24, 3, 6, Spritesheet.tiles);
+	
+	public static Sprite playerWDown1 = new Sprite(24, 0, 7, Spritesheet.tiles); // the sprites for walking
+	public static Sprite playerWUp1 = new Sprite(24, 2, 7, Spritesheet.tiles);
+	public static Sprite playerWLeft1 = new Sprite(24, 1, 7, Spritesheet.tiles);
+	public static Sprite playerWRight1 = new Sprite(24, 3, 7, Spritesheet.tiles);
+	public static Sprite playerWDown2 = new Sprite(24, 0, 9, Spritesheet.tiles); 
+	public static Sprite playerWUp2 = new Sprite(24, 2, 9, Spritesheet.tiles);
+	public static Sprite playerWLeft2 = new Sprite(24, 1, 9, Spritesheet.tiles);
+	public static Sprite playerWRight2 = new Sprite(24, 3, 9, Spritesheet.tiles);
+	
+	
+	
 	public Sprite(int size, int x, int y, Spritesheet sheet) {
 		SIZE = size;
 		this.x = x * SIZE; // because i want it to be located in a specific place in the sheet= each tile is multiplied by his size so when i change by 1, the tile is changed and not the pixel

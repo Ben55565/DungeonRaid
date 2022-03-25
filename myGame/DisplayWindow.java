@@ -16,7 +16,7 @@ import mob.Player;
 public class DisplayWindow extends Canvas implements Runnable {
 	// static variables
 	private static final long serialVersionUID = 1L; // just to remove a warning in the class name
-	public static int width = 300;
+	public static int width = 540;
 	public static int height = (width / 16) * 9; // giving aspect ration of 16:9
 	public static int scale = 3; // scaling the window size, while the render stay the same
 	public static String title = "Dungeon Raid";
