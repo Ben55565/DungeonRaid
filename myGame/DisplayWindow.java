@@ -11,12 +11,13 @@ import myGameGraphics.Screen;
 import keyInput.KeyBoard;
 import level.Level;
 import level.RandomLevel;
+import level.SpawnLevel;
 import mob.Player;
 
 public class DisplayWindow extends Canvas implements Runnable {
 	// static variables
 	private static final long serialVersionUID = 1L; // just to remove a warning in the class name
-	public static int width = 540;
+	public static int width = 500;
 	public static int height = (width / 16) * 9; // giving aspect ration of 16:9
 	public static int scale = 3; // scaling the window size, while the render stay the same
 	public static String title = "Dungeon Raid";
@@ -40,7 +41,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 		setPreferredSize(size);
 		setFocusable(true);
 		window = new JFrame();
-		level = new RandomLevel(64,64);
+		level = new SpawnLevel("/textures/level1.png");
 		key = new KeyBoard();
 		addKeyListener(key);
 		player = new Player(key);

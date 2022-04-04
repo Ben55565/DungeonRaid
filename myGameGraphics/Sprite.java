@@ -8,6 +8,8 @@ public class Sprite {
 	private Spritesheet sheet;
 
 	public static Sprite grass = new Sprite(8, 0, 0, Spritesheet.tiles); // create a sprite itself, grass texture
+	public static Sprite flower = new Sprite(8, 1, 0, Spritesheet.tiles); // create a sprite itself, grass texture
+	public static Sprite rock = new Sprite(8, 2, 0, Spritesheet.tiles); // create a sprite itself, grass texture
 	public static Sprite voidSprit = new Sprite(8, 0x65b4e6); // create a sprite itself, grass texture
 
 	public static Sprite playerDown = new Sprite(24, 0, 6, Spritesheet.tiles); // 24 because each tile is sized 8, the character is 3X3 , so i triple the size(8*3), and slice the tile number by three(the original 9 piece creation is in comments class)

@@ -4,26 +4,27 @@ import myGameGraphics.Screen;
 import tile.Tile;
 
 public class Level {
-
+	protected Tile[] tiles;
 	protected int width, height;
-	protected int[] tiles; // contain all tiles on the map
+	protected int[] tilesMaping; // contain indexing of all tiles on the map
 
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
-		tiles = new int[width * height];
+		tilesMaping = new int[width * height];
 		generateLevel();
 	} // hold list of all the tiles we need to render and managing them
 
 	public Level(String path) {
 		loadLevel(path);
+		generateLevel();
 	}
 
 	protected void generateLevel() {
 
 	}
 
-	private void loadLevel(String path) {
+	protected void loadLevel(String path) {
 
 	}
 
@@ -45,17 +46,26 @@ public class Level {
 		// all those together defining the render region
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
-				getTile(x, y).render(x, y, screen); // rendering each tile selected by the random get tile > random level 
+				//getTile(x, y).render(x, y, screen); // rendering each tile selected by the random get tile > random level 
+				if (x + y * 16 < 0 || x + y * 16 >= 256) {
+					Tile.voidTile.render(x, y, screen);
+					continue;
+				}
+				tiles[x + y * 16].render(x, y, screen);
 			}
 		}
 
 	}
 
 	public Tile getTile(int x, int y) {
-		if(x < 0 || y < 0 || x >= width || y >= height)
+		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.voidTile;
-		if (tiles[x + y * width] == 0)
+		if (tilesMaping[x + y * width] == 0)
 			return Tile.grass;
+		if (tilesMaping[x + y * width] == 1)
+			return Tile.flower;
+		if (tilesMaping[x + y * width] == 2)
+			return Tile.rock;
 		return Tile.voidTile;
 	}
 
