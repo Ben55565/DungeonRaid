@@ -4,7 +4,7 @@ import myGameGraphics.Screen;
 import tile.Tile;
 
 public class Level {
-	protected Tile[] tiles;
+	protected int[] tiles; // contain the color values of each level
 	protected int width, height;
 	protected int[] tilesMaping; // contain indexing of all tiles on the map
 
@@ -46,25 +46,25 @@ public class Level {
 		// all those together defining the render region
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
-				//getTile(x, y).render(x, y, screen); // rendering each tile selected by the random get tile > random level 
-				if (x + y * 16 < 0 || x + y * 16 >= 256) {
-					Tile.voidTile.render(x, y, screen);
-					continue;
-				}
-				tiles[x + y * 16].render(x, y, screen);
+				getTile(x, y).render(x, y, screen); // rendering each tile selected by the random get tile > random level 
+
 			}
 		}
 
 	}
 
+	// Grass = 0x267F00
+	// Flower = 0x0094FF
+	// Rock = 0x808080
+
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.voidTile;
-		if (tilesMaping[x + y * width] == 0)
+		if (tiles[x + y * width] == 0xff267f00)
 			return Tile.grass;
-		if (tilesMaping[x + y * width] == 1)
+		if (tiles[x + y * width] == 0xff0094ff)
 			return Tile.flower;
-		if (tilesMaping[x + y * width] == 2)
+		if (tiles[x + y * width] == 0xff808080)
 			return Tile.rock;
 		return Tile.voidTile;
 	}

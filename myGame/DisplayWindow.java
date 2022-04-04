@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import myGameGraphics.Screen;
 import keyInput.KeyBoard;
 import level.Level;
-import level.RandomLevel;
 import level.SpawnLevel;
 import mob.Player;
 
@@ -41,10 +40,10 @@ public class DisplayWindow extends Canvas implements Runnable {
 		setPreferredSize(size);
 		setFocusable(true);
 		window = new JFrame();
-		level = new SpawnLevel("/textures/level1.png");
+		level = new SpawnLevel("/textures/Levels/level1.png");
 		key = new KeyBoard();
 		addKeyListener(key);
-		player = new Player(key);
+		player = new Player(32*8,32*8,key);
 
 	}
 

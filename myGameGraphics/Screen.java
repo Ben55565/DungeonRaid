@@ -1,6 +1,5 @@
 package myGameGraphics;
 
-import mob.Player;
 import tile.Tile;
 
 public class Screen {
