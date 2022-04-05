@@ -3,7 +3,7 @@ package myGameGraphics;
 import tile.Tile;
 
 public class Screen {
-	private final int MAP_SIZE = 128;
+	private final int MAP_SIZE = 64;
 
 	// tiles are full block map. so when the game starts what shown on the screen is one tile.
 
@@ -48,15 +48,15 @@ public class Screen {
 	public void renderPlayer(int xp, int yp, Sprite sprite) {
 		xp -= xOffset; // cause right now the control is for moving the screen not the player. that corrects it
 		yp -= yOffset;
-		for (int y = 0; y < 24; y++) {
+		for (int y = 0; y < 32; y++) {
 			int ya = yp + y;
-			for (int x = 0; x < 24; x++) {
+			for (int x = 0; x < 32; x++) {
 				int xa = xp + x;
-				if (xa < -24 || xa >= width || ya < 0 || ya >= height) // xa can be lower the size of a tile to handle the render of the black bar on the left
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height) // xa can be lower the size of a tile to handle the render of the black bar on the left
 					break;
 				if (xa < 0)
 					xa = 0; // handle out of bounds exception
-				int color = sprite.pixels[x + (y * 24)]; // variable to define the color to render
+				int color = sprite.pixels[x + (y * 32)]; // variable to define the color to render
 				if (color != 0xff000000) // dont render black - dont render the back background of the character
 					pixels[xa + ya * width] = color; // set the current offset pixel to be the tile pixel(simulate the moving background)
 

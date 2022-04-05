@@ -38,10 +38,10 @@ public class Level {
 
 	public void render(int xScroll, int yScroll, Screen screen) { // using this method to pin the corners indexes(moving the screen also updating them, point 0,0 isnt always top-left corner
 		screen.setOffset(xScroll, yScroll); // actual location of the player, the screen moves relative to him
-		int x0 = xScroll >> 3; // left side of the screen. dividing by 16(via bits action - shift right) this because needed render per tile so pixel precision is not needed
-		int x1 = (xScroll + screen.width + 8) >> 3; // right side of the screen. adding 8 - adding one more tile to render on the bottom and right(get rid of black bars)
-		int y0 = yScroll >> 3; // top of the screen
-		int y1 = (yScroll + screen.height + 8) >> 3; // bottom of the screen
+		int x0 = xScroll >> 4; // left side of the screen. dividing by 16(via bits action - shift right) this because needed render per tile so pixel precision is not needed
+		int x1 = (xScroll + screen.width + 16) >> 4; // right side of the screen. adding 8 - adding one more tile to render on the bottom and right(get rid of black bars)
+		int y0 = yScroll >> 4; // top of the screen
+		int y1 = (yScroll + screen.height + 16) >> 4; // bottom of the screen
 
 		// all those together defining the render region
 		for (int y = y0; y < y1; y++) {
