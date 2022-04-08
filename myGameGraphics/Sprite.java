@@ -14,11 +14,15 @@ public class Sprite {
 
 	// Spawn level sprites:
 	public static Sprite spawnGrass = new Sprite(16, 0, 0, Spritesheet.spawn);
-	public static Sprite spawnWater = new Sprite(16, 1, 0, Spritesheet.spawn);
-	public static Sprite spawnHedge = new Sprite(16, 2, 0, Spritesheet.spawn);
-	public static Sprite spawnWall = new Sprite(16, 0, 1, Spritesheet.spawn);
-	public static Sprite spawnFloor = new Sprite(16, 1, 1, Spritesheet.spawn);
-	public static Sprite spawnWallMoss = new Sprite(16, 0, 2, Spritesheet.spawn);
+	public static Sprite spawnWater = new Sprite(16, 1, 1, Spritesheet.spawn);
+	public static Sprite spawnHedge = new Sprite(16, 2, 1, Spritesheet.spawn);
+	public static Sprite spawnWall = new Sprite(16, 3, 1, Spritesheet.spawn);
+	public static Sprite spawnFloor = new Sprite(16, 0, 2, Spritesheet.spawn);
+	public static Sprite spawnWallMoss = new Sprite(16, 0, 1, Spritesheet.spawn);
+	public static Sprite spawnFlower = new Sprite(16, 1, 0, Spritesheet.spawn);
+	public static Sprite spawnRock = new Sprite(16, 2, 0, Spritesheet.spawn);
+	public static Sprite spawnWall2 = new Sprite(16, 3, 0, Spritesheet.spawn);
+	public static Sprite spawnwaste = new Sprite(16, 1, 2, Spritesheet.spawn);
 
 	// Player sprites:
 

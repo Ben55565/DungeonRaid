@@ -7,6 +7,7 @@ public class Level {
 	protected int[] tiles; // contain the color values of each level
 	protected int width, height;
 	protected int[] tilesMaping; // contain indexing of all tiles on the map
+	public static Level spawn = new SpawnLevel("/textures/Levels/SpawnLevel.png");
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -60,12 +61,26 @@ public class Level {
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.voidTile;
-		if (tiles[x + y * width] == 0xff267f00)
-			return Tile.grass;
-		if (tiles[x + y * width] == 0xff0094ff)
+		if (tiles[x + y * width] == Tile.floorHex)
+			return Tile.spawnFloor;
+		if (tiles[x + y * width] == Tile.flowerHex)
 			return Tile.flower;
-		if (tiles[x + y * width] == 0xff808080)
+		if (tiles[x + y * width] == Tile.rockHex)
 			return Tile.rock;
+		if (tiles[x + y * width] == Tile.grassHex)
+			return Tile.spawnGrass;
+		if (tiles[x + y * width] == Tile.hedgeHex)
+			return Tile.spawnHedge;
+		if (tiles[x + y * width] == Tile.mossHex)
+			return Tile.spawnWallMoss;
+		if (tiles[x + y * width] == Tile.waterHex)
+			return Tile.spawnWater;
+		if (tiles[x + y * width] == Tile.wall2Hex)
+			return Tile.spawnWall2;
+		if (tiles[x + y * width] == Tile.wallHex)
+			return Tile.spawnWall;
+		if (tiles[x + y * width] == Tile.wasteHex)
+			return Tile.spawnWaste;
 		return Tile.voidTile;
 	}
 
