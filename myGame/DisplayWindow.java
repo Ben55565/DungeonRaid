@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import myGameGraphics.Screen;
 import keyInput.KeyBoard;
 import level.Level;
-import level.SpawnLevel;
+import level.TileCoordinate;
 import mob.Player;
 
 public class DisplayWindow extends Canvas implements Runnable {
@@ -43,7 +43,8 @@ public class DisplayWindow extends Canvas implements Runnable {
 		level = Level.spawn;
 		key = new KeyBoard();
 		addKeyListener(key);
-		player = new Player(16*8,16*8,key);
+		TileCoordinate playerSpawn = new TileCoordinate(4, 21);
+		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
 
 	}
 
@@ -95,7 +96,6 @@ public class DisplayWindow extends Canvas implements Runnable {
 	public void update() {
 		key.update();
 		player.update();
-	
 
 	}
 

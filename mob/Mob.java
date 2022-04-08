@@ -6,7 +6,7 @@ import myGameGraphics.Sprite;
 public abstract class Mob extends Entity {
 	
 	protected Sprite sprite;
-	protected int dir = 0; // used to identify which direction the mob need to move: 0 up, 1 right, 2 down 3 left
+	protected int dir = 1; // used to identify which direction the mob need to move: 0 up, 1 right, 2 down 3 left
 	protected boolean moving = false;
 	
 	public void move(int xa, int ya) { // consider on the x - player can go: right, left, stay in place. consider on the y - player can go: up down, stay in place

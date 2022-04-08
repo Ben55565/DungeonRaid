@@ -1,7 +1,6 @@
 package comments;
 
-import myGameGraphics.Sprite;
-import myGameGraphics.Spritesheet;
+
 
 public class Comments {
 		/* here i will enter comments about changes iv made with my code, in case i need need to debug
