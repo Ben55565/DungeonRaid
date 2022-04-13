@@ -39,6 +39,10 @@ public class Sprite {
 	public static Sprite playerWUp2 = new Sprite(32, 2, 7, Spritesheet.tiles);
 	public static Sprite playerWLeft2 = new Sprite(32, 1, 7, Spritesheet.tiles);
 	public static Sprite playerWRight2 = new Sprite(32, 3, 7, Spritesheet.tiles);
+	
+	// projectile sprites:
+	
+	public static Sprite projectileCharacter = new Sprite(16,0,0,Spritesheet.projectileCharacter); 
 
 	public Sprite(int size, int x, int y, Spritesheet sheet) {
 		SIZE = size;

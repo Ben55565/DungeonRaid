@@ -12,6 +12,7 @@ import keyInput.KeyBoard;
 import level.Level;
 import level.TileCoordinate;
 import mob.Player;
+import keyInput.Mouse;
 
 public class DisplayWindow extends Canvas implements Runnable {
 	// static variables
@@ -43,8 +44,12 @@ public class DisplayWindow extends Canvas implements Runnable {
 		level = Level.spawn;
 		key = new KeyBoard();
 		addKeyListener(key);
-		TileCoordinate playerSpawn = new TileCoordinate(4, 21);
+		Mouse mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+		TileCoordinate playerSpawn = new TileCoordinate(14, 31);
 		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
+		player.init(level);
 
 	}
 
@@ -96,6 +101,7 @@ public class DisplayWindow extends Canvas implements Runnable {
 	public void update() {
 		key.update();
 		player.update();
+		level.update();
 
 	}
 

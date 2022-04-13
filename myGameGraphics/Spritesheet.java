@@ -12,7 +12,8 @@ public class Spritesheet { // using the image of the sprite
 	public int[] pixels;
 
 	public static Spritesheet tiles = new Spritesheet("/textures/Sheets/spriteSheet.png", 256);
-	public static Spritesheet spawn = new Spritesheet("/textures/Sheets/spawnLevel.png", 64 );
+	public static Spritesheet spawn = new Spritesheet("/textures/Sheets/spawnLevel.png", 64);
+	public static Spritesheet projectileCharacter = new Spritesheet("/textures/Sheets/projectiles/character.png", 48);
 
 	public Spritesheet(String path, int size) {
 		this.path = path;

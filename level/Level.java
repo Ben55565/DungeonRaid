@@ -1,5 +1,9 @@
 package level;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import entity.Entity;
 import myGameGraphics.Screen;
 import tile.Tile;
 
@@ -8,6 +12,7 @@ public class Level {
 	protected int width, height;
 	protected int[] tilesMaping; // contain indexing of all tiles on the map
 	public static Level spawn = new SpawnLevel("/textures/Levels/SpawnLevel.png");
+	private List<Entity> entities = new ArrayList<Entity>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -30,11 +35,17 @@ public class Level {
 	}
 
 	public void update() {
-
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).update();
+		}
 	}
 
 	private void time() {
 
+	}
+
+	public void add(Entity e) {
+		entities.add(e);
 	}
 
 	public void render(int xScroll, int yScroll, Screen screen) { // using this method to pin the corners indexes(moving the screen also updating them, point 0,0 isnt always top-left corner
@@ -51,16 +62,16 @@ public class Level {
 
 			}
 		}
+		
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).render(screen);
+		}
 
 	}
 
-	// Grass = 0x267F00
-	// Flower = 0x0094FF
-	// Rock = 0x808080
-
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
-			return Tile.voidTile;
+			return Tile.spawnGrass;
 		if (tiles[x + y * width] == Tile.floorHex)
 			return Tile.spawnFloor;
 		if (tiles[x + y * width] == Tile.flowerHex)
@@ -81,7 +92,7 @@ public class Level {
 			return Tile.spawnWall;
 		if (tiles[x + y * width] == Tile.wasteHex)
 			return Tile.spawnWaste;
-		return Tile.voidTile;
+		return Tile.spawnGrass;
 	}
 
 }

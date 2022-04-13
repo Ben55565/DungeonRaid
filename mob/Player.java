@@ -1,6 +1,8 @@
 package mob;
 
 import keyInput.KeyBoard;
+import keyInput.Mouse;
+import myGame.DisplayWindow;
 import myGameGraphics.Screen;
 import myGameGraphics.Sprite;
 
@@ -42,12 +44,25 @@ public class Player extends Mob {
 			xa--;
 		if (key.right)
 			xa++;
-
 		if (xa != 0 || ya != 0) {
 			move(xa, ya); // their value if not 0 can be only 1 or -1(indicating the direction where 0 is stay in place) so if there is any movement from the key, make it.
 			walking = true;
 		} else {
 			walking = false;
+		}
+
+		updateShooting();
+	}
+
+	private void updateShooting() {
+		// to calculate the direction the player shoots at:  get a triangle between the mouse position(x,y) and the player position(x,y)
+		//  calculate both edges(dy = y2 - y1, dx = x2 - x1), and performing atan2(a/b) to find the degree the player should shoot at.
+
+		if (Mouse.getMouseB() == 1) {
+			double dx = Mouse.getMouseX() - (DisplayWindow.width * DisplayWindow.scale) / 2; // calculation using the center of the screen, as the location of the player on the window
+			double dy = Mouse.getMouseY() - (DisplayWindow.height * DisplayWindow.scale) / 2;
+			double dir = Math.atan2(dy, dx); // atan2 - handles division by zero instead of crushing the program. 
+			shoot(x, y, dir);
 		}
 	}
 

@@ -30,7 +30,7 @@ public class Tile {
 	public static Tile spawnWallMoss = new SpawnWallTile(Sprite.spawnWallMoss);
 	public static Tile spawnFlower = new SpawnFlowerTile(Sprite.spawnFlower);
 	public static Tile spawnRock = new SpawnRockTile(Sprite.spawnRock);
-	public static Tile spawnWaste = new SpawnWallTile(Sprite.spawnwaste);
+	public static Tile spawnWaste = new SpawnRockTile(Sprite.spawnwaste);
 
 	public final static int grassHex = 0xff00ff00;
 	public final static int hedgeHex = 0xff007f0e;
