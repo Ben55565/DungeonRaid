@@ -22,6 +22,7 @@ public abstract class Entity {
 	
 	public void remove() {
 		// remove the Entity from the level
+		
 		removed = true;
 	}
 	

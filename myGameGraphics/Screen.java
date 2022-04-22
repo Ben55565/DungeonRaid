@@ -27,8 +27,25 @@ public class Screen {
 		}
 	}
 
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) { 
+		if (fixed) { // if the position is fixed do the fix for the position
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		for(int y = 0; y < sprite.getHeight(); y++) {
+			int ya =y + yp;
+			for(int x = 0; x < sprite.getWidth(); x++) {
+				int xa = x + xp;
+				if(xa < 0 || xa >= width || ya < 0 || ya >= height)
+					continue;
+				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
+			}
+		}
+
+	}
+
 	public void renderTile(int xp, int yp, Tile tile) {
-		xp -= xOffset; // cause right now the control is for moving the screen not the player. that corrects it
+		xp -= xOffset; // because right now the control is for moving the screen not the player. that corrects it, the sprite wont move with the map
 		yp -= yOffset;
 		for (int y = 0; y < tile.sprite.SIZE; y++) {
 			int ya = yp + y;
@@ -93,11 +110,3 @@ public class Screen {
 	}
 
 }
-
-/* Saved comments for myself to learn from:
- * 
- *	int tileIndex = ((xx >> 4) & MAP_SIZE-1) + ((yy >> 4) & MAP_SIZE-1) * MAP_SIZE; // find the correct tile matching for the specific pixel its on, using size of 16 *note to self - lower it when im more advanced.
- *	>> - instead of dividing by 16, which is power of 2, >> is shifting the bits 4 places  right, so the division action achieved but in a faster way - using bits
- *	& - creating some kind of loop, if we try to go beyond the 63 tile, it will return to the tile index 0
- * 
- */

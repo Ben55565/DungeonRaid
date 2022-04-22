@@ -1,8 +1,5 @@
 package mob;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import entity.CharacterProjectile;
 import entity.Entity;
 import entity.Projectile;
@@ -13,7 +10,6 @@ public abstract class Mob extends Entity {
 	protected Sprite sprite;
 	protected int dir = 1; // used to identify which direction the mob need to move: 0 up, 1 right, 2 down 3 left
 	protected boolean moving = false;
-	protected List<Projectile> shots = new ArrayList<Projectile>();
 
 	public void move(int xa, int ya) { // consider on the x - player can go: right, left, stay in place. consider on the y - player can go: up down, stay in place
 		// -1, 0, 1 for the direction of the movement for x and y
@@ -32,6 +28,8 @@ public abstract class Mob extends Entity {
 			x += xa;
 
 		}
+
+
 	}
 
 	public void update() {
@@ -39,8 +37,7 @@ public abstract class Mob extends Entity {
 	}
 
 	protected void shoot(int x, int y, double dir) {
-		Projectile p = new CharacterProjectile(x,y,dir);
-		shots.add(p);
+		Projectile p = new CharacterProjectile(x, y, dir);
 		level.add(p);
 
 	}

@@ -31,6 +31,7 @@ public class Tile {
 	public static Tile spawnFlower = new SpawnFlowerTile(Sprite.spawnFlower);
 	public static Tile spawnRock = new SpawnRockTile(Sprite.spawnRock);
 	public static Tile spawnWaste = new SpawnRockTile(Sprite.spawnwaste);
+	public static Tile spawnTallGrass = new SpawnGrassTile(Sprite.spawnTallGrass);
 
 	public final static int grassHex = 0xff00ff00;
 	public final static int hedgeHex = 0xff007f0e;
@@ -42,6 +43,7 @@ public class Tile {
 	public final static int rockHex = 0xff404040;
 	public final static int mossHex = 0xff4800ff;
 	public final static int wasteHex = 0xffff6a00;
+	public final static int TallGrassHex = 0xff002807;
 
 	public Tile(Sprite sprite) {
 		this.sprite = sprite;

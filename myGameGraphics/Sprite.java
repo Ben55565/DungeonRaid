@@ -4,6 +4,7 @@ public class Sprite {
 
 	public final int SIZE; // size of each individual sprite(if i have monsters for example and i want them to take specific size different from tiles)
 	private int x, y; // coordinate of the sprite
+	private int width, height;
 	public int[] pixels;
 	private Spritesheet sheet;
 
@@ -23,6 +24,7 @@ public class Sprite {
 	public static Sprite spawnRock = new Sprite(16, 2, 0, Spritesheet.spawn);
 	public static Sprite spawnWall2 = new Sprite(16, 3, 0, Spritesheet.spawn);
 	public static Sprite spawnwaste = new Sprite(16, 1, 2, Spritesheet.spawn);
+	public static Sprite spawnTallGrass = new Sprite(16, 2, 2, Spritesheet.spawn);
 
 	// Player sprites:
 
@@ -43,25 +45,49 @@ public class Sprite {
 	// projectile sprites:
 	
 	public static Sprite projectileCharacter = new Sprite(16,0,0,Spritesheet.projectileCharacter); 
+	
+	// Particles sprites:
+	
+	public static Sprite particleNormal = new Sprite(3,0xff242424);
 
 	public Sprite(int size, int x, int y, Spritesheet sheet) {
 		SIZE = size;
+		this.width = size;
+		this.height = size;
 		this.x = x * SIZE; // because i want it to be located in a specific place in the sheet= each tile is multiplied by his size so when i change by 1, the tile is changed and not the pixel
 		this.y = y * SIZE;
 		this.sheet = sheet;
 		pixels = new int[SIZE * SIZE]; // size of the sprite
 		load();
 	}
+	
+	public Sprite(int width, int height, int color) {
+		SIZE = -1;
+		this.width = width;
+		this.height = height;
+		pixels = new int[width * height];
+		setColor(color);
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
 
 	public Sprite(int size, int color) {
 		this.SIZE = size;
+		this.width = size;
+		this.height = size;
 		pixels = new int[SIZE * SIZE];
 		setColor(color);
 
 	}
 
 	private void setColor(int color) {
-		for (int i = 0; i < SIZE * SIZE; i++) {
+		for (int i = 0; i < width * height; i++) {
 			pixels[i] = color;
 		}
 	}

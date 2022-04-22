@@ -2,8 +2,9 @@ package level;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import entity.Entity;
+import entity.Particle;
+import entity.Projectile;
 import myGameGraphics.Screen;
 import tile.Tile;
 
@@ -13,6 +14,8 @@ public class Level {
 	protected int[] tilesMaping; // contain indexing of all tiles on the map
 	public static Level spawn = new SpawnLevel("/textures/Levels/SpawnLevel.png");
 	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Projectile> projectiles = new ArrayList<Projectile>();
+	private List<Particle> particles = new ArrayList<Particle>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -24,6 +27,7 @@ public class Level {
 	public Level(String path) {
 		loadLevel(path);
 		generateLevel();
+
 	}
 
 	protected void generateLevel() {
@@ -34,18 +38,68 @@ public class Level {
 
 	}
 
+	public boolean tileCollision(double x, double y, double xa, double ya, int size) { // check collision for entities, like projectiles for example - prevent them from going through a wall
+		// x and y indicates the location of the entity, xa ya indicates its trajectory, size is the size of the entity object itself
+		boolean solid = false;
+		for (int corner = 0; corner < 4; corner++) { // checking for collision in each corner of the tile
+			int xt = (((int) x + (int) xa) + corner % 2 * size / 4 + 15) / 16;
+			int yt = (((int) y + (int) ya) + corner / 2 * size / 4 + 15) / 16; // the division and  addition is to perfect as much as possible the accuracy for the hitbox of the collision based objects
+			if (getTile(xt, yt).solid())
+				solid = true;
+		}
+
+		return solid;
+	}
+
 	public void update() {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).update();
+		}
+		for (int i = 0; i < particles.size(); i++) {
+			particles.get(i).update();
+		}
+
+		remove(); // remove the particales that their time runs out
 	}
 
-	private void time() {
-
+	private void remove() {
+		for (int i = 0; i < entities.size(); i++) {
+			if (entities.get(i).isRemoved()) {
+				entities.remove(i);
+			}
+		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			if (projectiles.get(i).isRemoved()) {
+				projectiles.remove(i);
+			}
+		}
+		for (int i = 0; i < particles.size(); i++) {
+			if (particles.get(i).isRemoved()) {
+				particles.remove(i);
+			}
+		}
 	}
+
+	//	private void time() {
+	//
+	//	}
 
 	public void add(Entity e) {
-		entities.add(e);
+		e.init(this);
+		if (e instanceof Particle) {
+			particles.add((Particle) e);
+		} else if (e instanceof Projectile) {
+			projectiles.add((Projectile) e);
+		} else {
+			entities.add(e);
+		}
+	}
+
+	public List<Projectile> getProjectiles() {
+		return projectiles;
 	}
 
 	public void render(int xScroll, int yScroll, Screen screen) { // using this method to pin the corners indexes(moving the screen also updating them, point 0,0 isnt always top-left corner
@@ -62,9 +116,15 @@ public class Level {
 
 			}
 		}
-		
+
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
+		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).render(screen);
+		}
+		for (int i = 0; i < particles.size(); i++) {
+			particles.get(i).render(screen);
 		}
 
 	}
@@ -74,6 +134,8 @@ public class Level {
 			return Tile.spawnGrass;
 		if (tiles[x + y * width] == Tile.floorHex)
 			return Tile.spawnFloor;
+		if (tiles[x + y * width] == Tile.TallGrassHex)
+			return Tile.spawnTallGrass;
 		if (tiles[x + y * width] == Tile.flowerHex)
 			return Tile.flower;
 		if (tiles[x + y * width] == Tile.rockHex)

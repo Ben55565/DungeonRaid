@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 public class KeyBoard implements KeyListener{
 
-	private boolean[] keys = new boolean[120];
+	private boolean[] keys = new boolean[160];
 	public boolean up, down, left, right;
 	
 	public void update() { // checking every update if a key has been pressed
@@ -21,6 +21,7 @@ public class KeyBoard implements KeyListener{
 
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
+		
 		
 	}
 

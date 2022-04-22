@@ -1,5 +1,7 @@
 package mob;
 
+import entity.CharacterProjectile;
+import entity.Projectile;
 import keyInput.KeyBoard;
 import keyInput.Mouse;
 import myGame.DisplayWindow;
@@ -12,6 +14,8 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anime = 0;
 	private boolean walking = false;
+	private int fireRate = 0;
+
 
 	public Player(KeyBoard key) {
 
@@ -25,11 +29,12 @@ public class Player extends Mob {
 		this.x = x;
 		this.y = y;
 		this.key = key;
-
+		fireRate = CharacterProjectile.FIRERATE;
 	}
 
 	public void update() { // update the movement of the player according to the key pressed.
-
+		if(fireRate > 0)
+			fireRate--;
 		int xa = 0, ya = 0; // note the direction the player needs to move
 		if (anime < 7500)
 			anime++; // avoid crushing if the game is open with no input, should be going up by 60 each second
@@ -50,19 +55,30 @@ public class Player extends Mob {
 		} else {
 			walking = false;
 		}
-
+		clear();
 		updateShooting();
+	}
+
+	private void clear() {
+		for(int i = 0; i < level.getProjectiles().size(); i++) { // method for clearing projectiles that have gone beyond the range field
+			Projectile p = level.getProjectiles().get(i);
+			if(p.isRemoved()) {
+				level.getProjectiles().remove(i);
+			}
+		}
+		
 	}
 
 	private void updateShooting() {
 		// to calculate the direction the player shoots at:  get a triangle between the mouse position(x,y) and the player position(x,y)
 		//  calculate both edges(dy = y2 - y1, dx = x2 - x1), and performing atan2(a/b) to find the degree the player should shoot at.
 
-		if (Mouse.getMouseB() == 1) {
+		if (Mouse.getMouseB() == 1 && fireRate <= 0) {
 			double dx = Mouse.getMouseX() - (DisplayWindow.width * DisplayWindow.scale) / 2; // calculation using the center of the screen, as the location of the player on the window
 			double dy = Mouse.getMouseY() - (DisplayWindow.height * DisplayWindow.scale) / 2;
 			double dir = Math.atan2(dy, dx); // atan2 - handles division by zero instead of crushing the program. 
 			shoot(x, y, dir);
+			fireRate = CharacterProjectile.FIRERATE;
 		}
 	}
 
