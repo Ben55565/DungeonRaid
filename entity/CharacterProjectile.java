@@ -20,8 +20,8 @@ public class CharacterProjectile extends Projectile {
 	}
 
 	public void update() {
-		if (level.tileCollision(x, y, nx, ny, 10)) { // if the projectiles hit a collision based tile, remove them
-			level.add(new ParticleSpawner((int)x, (int)y, 44, 50, level));
+		if (level.tileCollision((int)(x + nx), (int)(y + ny), 10, 4, 5)) { // if the projectiles hit a collision based tile, remove them
+			level.add(new ParticleSpawner((int)x, (int)y, 70, 70, level));
 			remove();
 		}
 		move();
@@ -42,7 +42,7 @@ public class CharacterProjectile extends Projectile {
 	}
 
 	public void render(Screen screen) {
-		screen.renderProjectile((int) x + 8, (int) y + 8, this);
+		screen.renderProjectile((int) x - 10, (int) y - 6, this);
 	}
 
 }

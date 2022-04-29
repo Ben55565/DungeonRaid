@@ -38,12 +38,12 @@ public class Level {
 
 	}
 
-	public boolean tileCollision(double x, double y, double xa, double ya, int size) { // check collision for entities, like projectiles for example - prevent them from going through a wall
+	public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset) { // check collision for entities, like projectiles for example - prevent them from going through a wall
 		// x and y indicates the location of the entity, xa ya indicates its trajectory, size is the size of the entity object itself
 		boolean solid = false;
 		for (int corner = 0; corner < 4; corner++) { // checking for collision in each corner of the tile
-			int xt = (((int) x + (int) xa) + corner % 2 * size / 4 + 15) / 16;
-			int yt = (((int) y + (int) ya) + corner / 2 * size / 4 + 15) / 16; // the division and  addition is to perfect as much as possible the accuracy for the hitbox of the collision based objects
+			int xt = (x - corner % 2 * size + xOffset) >> 4;
+			int yt = (y - corner / 2 * size + yOffset) >> 4; // the division and  addition is to perfect as much as possible the accuracy for the hitbox of the collision based objects
 			if (getTile(xt, yt).solid())
 				solid = true;
 		}

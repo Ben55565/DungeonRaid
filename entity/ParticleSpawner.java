@@ -5,6 +5,7 @@ import level.Level;
 
 public class ParticleSpawner extends Spawner {
 
+	
 	@SuppressWarnings("unused")
 	private int timeAlive;
 

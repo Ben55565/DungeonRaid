@@ -48,7 +48,7 @@ public class Sprite {
 	
 	// Particles sprites:
 	
-	public static Sprite particleNormal = new Sprite(3,0xff242424);
+	public static Sprite particleNormal = new Sprite(2,0xff242424);
 
 	public Sprite(int size, int x, int y, Spritesheet sheet) {
 		SIZE = size;

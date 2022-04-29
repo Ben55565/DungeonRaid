@@ -14,7 +14,7 @@ public class RockTile extends Tile{
 
 	}
 	
-	public boolean solid() { // checking if the player can go though this block or not
+	public boolean solidForWalk() { // checking if the player can go though this block or not
 		return true;
 	}
 }

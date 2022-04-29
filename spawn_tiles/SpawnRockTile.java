@@ -14,5 +14,9 @@ public class SpawnRockTile extends Tile {
 		screen.renderTile(x << 4, y << 4, this); // translating tiles precision to pixels, multiplying by 16
 
 	}
+	
+	public boolean solidForWalk() {
+		return true;
+	}
 
 }

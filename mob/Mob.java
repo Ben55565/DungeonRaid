@@ -47,7 +47,7 @@ public abstract class Mob extends Entity {
 		for (int corner = 0; corner < 4; corner++) { // checking for collision in each corner of the tile
 			int xt = ((x + xa) + corner % 2 * 12) / 16;
 			int yt = ((y + ya) + corner / 2 * 12 + 10) / 16; // Adjust the corners of each tiles for collision - times 12 is the collision area, plus 10 is configuring the collision span(up and down for y, not needed for x)
-			if (level.getTile(xt, yt).solid())
+			if (level.getTile(xt, yt).solid() || level.getTile(xt, yt).solidForWalk())
 				solid = true;
 		}
 

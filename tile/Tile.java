@@ -8,6 +8,7 @@ import spawn_tiles.SpawnGrassTile;
 import spawn_tiles.SpawnHedgeTile;
 import spawn_tiles.SpawnRockTile;
 import spawn_tiles.SpawnWallTile;
+import spawn_tiles.SpawnWasteTile;
 import spawn_tiles.SpawnWaterTile;
 
 public class Tile {
@@ -30,7 +31,7 @@ public class Tile {
 	public static Tile spawnWallMoss = new SpawnWallTile(Sprite.spawnWallMoss);
 	public static Tile spawnFlower = new SpawnFlowerTile(Sprite.spawnFlower);
 	public static Tile spawnRock = new SpawnRockTile(Sprite.spawnRock);
-	public static Tile spawnWaste = new SpawnRockTile(Sprite.spawnwaste);
+	public static Tile spawnWaste = new SpawnWasteTile(Sprite.spawnwaste);
 	public static Tile spawnTallGrass = new SpawnGrassTile(Sprite.spawnTallGrass);
 
 	public final static int grassHex = 0xff00ff00;
@@ -54,6 +55,10 @@ public class Tile {
 	}
 
 	public boolean solid() { // checking if the player can go though this block or not
+		return false;
+	}
+	
+	public boolean solidForWalk() { // checking if shots can go over it
 		return false;
 	}
 
