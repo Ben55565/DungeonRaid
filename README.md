@@ -5,7 +5,9 @@
 #### My code is filled with comments, which contributes for my own understanding - and hopfuly others; nevertheless i have made a 'comments' package for things that require more comprehensive explanations on change i'v made in my code.
 <h3 align="center">Here are some screenshots from the game:<h3/>
 
- <img align="center" width =450px src="C:\Users\Ben - PC\Desktop\גיבוי משחק לפני שינוי גודל\front.png<img/>
+<p align="center">
+  <img src="your_relative_path_here" width="350" title="hover text">
+</p>
 
 <h4> Thank you for visiting my work,<br/>
 Ben Daniels.<h4/>
