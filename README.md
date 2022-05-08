@@ -6,7 +6,7 @@
 <h3 align="center">Here are some screenshots from the game:<h3/>
 
 <p align="center">
-  <img src="your_relative_path_here" width="350" title="hover text">
+  <img src="front.png" width="350" title="hover text">
 </p>
 
 <h4> Thank you for visiting my work,<br/>
