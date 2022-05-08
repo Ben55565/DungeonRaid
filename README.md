@@ -4,5 +4,7 @@
 #### The game is a work in progress - meant to sharpen my skills in java, and learn new things along the way.
 #### My code is filled with comments, which contributes for my own understanding - and hopfuly others; nevertheless i have made a 'comments' package for things that require more comprehensive explanations on change i'v made in my code.
 <p>Here are some screenShots from the game:<p/>
-##### Thank you for visiting my work,
-##### Ben Daniels.
+
+
+<h4> Thank you for visiting my work,<br/>
+Ben Daniels.<h4/>
