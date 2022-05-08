@@ -6,8 +6,16 @@
 <h3 align="center">Here are some screenshots from the game:<h3/>
 
 <p align="center">
-  <img src="front.png" width="650" title="hover text">
+  <img src="front.png" width="650" title="name photo">
 </p>
-
+<p align="center">
+  <img src="game1.png" width="650" title="photo1">
+</p>
+  <p align="center">
+  <img src="game2.png" width="650" title="photo2">
+</p>
+  <p align="center">
+  <img src="game3.png" width="650" title="photo3">
+</p>
 <h4> Thank you for visiting my work,<br/>
 Ben Daniels.<h4/>
